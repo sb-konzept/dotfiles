@@ -22,7 +22,8 @@ sudo apt-get install -y \
 curl -L git.io/antigen > .antigen.zsh
 
 # nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+npm i -g pnpm
 
 # jenv
 git clone https://github.com/jenv/jenv.git ~/.jenv

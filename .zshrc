@@ -4,18 +4,28 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH="`yarn global bin`:$PATH"
+
+# if yarn is installed, use yarn global bin
+if [ -x "$(command -v yarn)" ]; then
+  export PATH="`yarn global bin`:$PATH"
+fi
 
 # jenv
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+if [ -x "$(command -v jenv)" ]; then
+  export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
+fi
 
 # rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+if [ -x "$(command -v rbenv)" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
 
 # pyenv
-eval "$(pyenv init --path)"
+if [ -x "$(command -v pyenv)" ]; then
+  eval "$(pyenv init -)"
+fi
 
 # android
 export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
@@ -89,3 +99,11 @@ load-nvmrc
 unalias tldr
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# pnpm
+export PNPM_HOME="/Users/micha/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
